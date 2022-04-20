@@ -2,6 +2,8 @@
 FROM python:3.8.0-alpine
 
 
+RUN apk add build-base
+
 # set working directory
 WORKDIR /app
 
