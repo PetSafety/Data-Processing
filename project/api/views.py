@@ -3,7 +3,7 @@ from sqlalchemy import exc
 
 from database_singleton import Singleton
 from project.api.utils.creation_utils import Utils
-from project.api.models import Transporte, DadosEmbarcado
+from project.api.models import DadosEmbarcado
 
 data_processing_blueprint = Blueprint("data_processing_blueprint", __name__)
 db = Singleton().database_connection()
@@ -13,16 +13,6 @@ utils = Utils()
 @data_processing_blueprint.route("/ping", methods=["GET"])
 def pong():
     return jsonify({"message": "works!"}), 200
-
-@data_processing_blueprint.route("/ping2", methods=["GET"])
-def get_all_schedule():
-    response = {
-        "status": "success",
-        "data": {
-            "schedules": [schedule.to_json() for schedule in Transporte.query.all()]
-        },
-    }
-    return jsonify(response), 200
 
 @data_processing_blueprint.route("/process_data", methods=["POST"])
 def process_data():
