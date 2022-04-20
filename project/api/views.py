@@ -37,3 +37,17 @@ def process_data():
     except exc.IntegrityError as e:
         db.session.rollback()
         return jsonify(error_response), 400
+
+@data_processing_blueprint.route("/get_processed_data", methods=["GET"])
+def get_processed_data():
+
+    try:
+        response = {
+            "status": "success",
+            "data": {
+                "processed_datas": [data.to_json() for data in DadosEmbarcado.query.all()]
+            },
+        }
+        return response, 200
+    except Exception as err:
+        return jsonify(err), 404
