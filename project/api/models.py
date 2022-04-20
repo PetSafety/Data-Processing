@@ -1,19 +1,32 @@
-from database_singleton import Singleton
+from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy.dialects import postgresql
+import uuid
 
-db = Singleton().database_connection()
+db = SQLAlchemy()
 
 
-class Example(db.Model):
-    __tablename__ = "Example"
+class DadosEmbarcado(db.Model):
+    __tablename__ = "dados_embarcado"
 
-    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    example = db.Column(db.String(255), nullable=False)
+    iddado = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    temperatura = db.Column(db.Text, nullable=False)
+    ruido = db.Column(db.Text, nullable=False)
+    video = db.Column(db.Text, nullable=False)
 
-    def __init__(self, example):
-        self.example = example
+    def __init__(
+            self,
+            temperatura,
+            ruido,
+            video
+    ):
+        self.temperatura = temperatura
+        self.ruido = ruido
+        self.video = video
 
     def to_json(self):
         return {
-            "id": self.id,
-            "example": self.example,
+            "iddado": self.iddado,
+            "temperatura": self.temperatura,
+            "ruido": self.ruido,
+            "video": self.video
         }
