@@ -14,8 +14,11 @@ def client():
         yield client
 
 def test_ping(client):
-    # dados = DadosEmbarcado.query.all()
     rv = client.get("/api/ping")
 
     print(rv.data)
-    assert rv.data == "kk"
+    message = {
+        "message": "works!"
+        }
+
+    assert eval(rv.data) == message
