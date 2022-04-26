@@ -23,7 +23,8 @@ def process_data():
     dados_processamento = DadosEmbarcado(
         request_data['temperatura'],
         request_data['ruido'],
-        request_data['video']
+        request_data['video'],
+        request_data['idCaixa']
         )
     response = {"status": "success", "data": {"request": request_data}}
 

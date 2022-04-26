@@ -12,21 +12,26 @@ class DadosEmbarcado(db.Model):
     temperatura = db.Column(db.Text, nullable=False)
     ruido = db.Column(db.Text, nullable=False)
     video = db.Column(db.Text, nullable=False)
+    idCaixa = db.Column(db.Integer, nullable=False)
 
     def __init__(
             self,
             temperatura,
             ruido,
-            video
+            video,
+            idCaixa
+            
     ):
         self.temperatura = temperatura
         self.ruido = ruido
         self.video = video
+        self.idCaixa = idCaixa
 
     def to_json(self):
         return {
             "iddado": self.iddado,
             "temperatura": self.temperatura,
             "ruido": self.ruido,
-            "video": self.video
+            "video": self.video,
+            "idCaixa": self.idCaixa
         }
